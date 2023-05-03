@@ -61,15 +61,18 @@ const posts = [
 
 posts.forEach(element => {
     const dateReverse = reverseDate(element.created);
-    const nullImage = getInitials(element.author.name);
+
+    // PERSONAL WAY TO SEARCH INITIALS
     
+    const initials = "Luca".charAt(0) + "Formincoli".charAt(0)
+    console.log(initials)
     
 
     document.getElementById("container").innerHTML += `<div class="post">
     <div class="post__header">
         <div class="post-meta">                    
             <div class="post-meta__icon">
-                <img class="profile-pic" src="${element.author.image || 'https://via.placeholder.com/150x150.png?text=' + nullImage}" alt="${element.author.name} ">                    
+                <img class="profile-pic" src="${element.author.image || 'https://via.placeholder.com/150x150.png?text=' + initials}" alt="${element.author.name} ">                    
             </div>
             <div class="post-meta__data">
                 <div class="post-meta__author">${element.author.name}</div>
@@ -126,11 +129,10 @@ for (let i = 0; i< eleLikeButtons.length; i++){
 
 function reverseDate(date) {
     const partDate = date.split('-');
-    return `${partDate[2]}-${partDate[1]}-${partDate[0]}`;
+    const reverseDate = date.split("-").reverse().join("-");
+    return reverseDate
 }
 
-// FUNZIONE PER CAMBIARE L'IMMAGINE NULLA
 
-function getInitials(name) {
-    return name.split(' ').map(word => word.charAt(0)).join('').toUpperCase();
-}
+
+
