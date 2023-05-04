@@ -57,26 +57,32 @@ const posts = [
 ];
 
 
-// STAMPO IN PAGINA I DATI FORNITI DALL'ARRAY
 
+// STAMPO IN PAGINA I DATI FORNITI DALL'ARRAY
+document.getElementById("container").innerHTML = "" // pulire il container per accumulare i nuovi post o usare il reduce//
 posts.forEach(element => {
-    const dateReverse = reverseDate(element.created);
+
+
+console.log(posts[3].author.image)  // modo per selezionare un elemente o un sottoelemento in un array //
 
     // PERSONAL WAY TO SEARCH INITIALS
+    function getinitials(name,surname){
+        const initials = name.charAt(0) + surname.charAt(0)
+        return initials
+    }
     
-    const initials = "Luca".charAt(0) + "Formincoli".charAt(0)
-    console.log(initials)
+    
     
 
     document.getElementById("container").innerHTML += `<div class="post">
     <div class="post__header">
         <div class="post-meta">                    
             <div class="post-meta__icon">
-                <img class="profile-pic" src="${element.author.image || 'https://via.placeholder.com/150x150.png?text=' + initials}" alt="${element.author.name} ">                    
+                <img class="profile-pic" src="${element.author.image || 'https://via.placeholder.com/150x150.png?text=' + getinitials("Luca","Fromincola")}" alt="${element.author.name} ">                    
             </div>
             <div class="post-meta__data">
                 <div class="post-meta__author">${element.author.name}</div>
-                <div class="post-meta__time"> ${dateReverse} </div>
+                <div class="post-meta__time"> ${ reverseDate(element.created)} </div>
             </div>                    
         </div>
     </div>
@@ -101,8 +107,8 @@ posts.forEach(element => {
 });
 
 // SELEZIONO I BOTTONI E I LIKES
-
-const eleLikeButtons = document.querySelectorAll(".like-button");
+const elecontainer = document.getElementById("container")
+const eleLikeButtons = elecontainer.querySelectorAll(".like-button"); // seleziono tutti i bottoni dentro al container selezionandolo prima //
 const eleCounters = document.querySelectorAll(".js-likes-counter")
 
 for (let i = 0; i< eleLikeButtons.length; i++){
@@ -128,7 +134,6 @@ for (let i = 0; i< eleLikeButtons.length; i++){
 // FUNZIONE PER CAMBIARE LA DATA
 
 function reverseDate(date) {
-    const partDate = date.split('-');
     const reverseDate = date.split("-").reverse().join("-");
     return reverseDate
 }
